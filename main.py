@@ -7,6 +7,10 @@ from aiogram.types import Message
 bot = Bot(token='')
 dp = Dispatcher()
 
+@dp.message(CommandStart())
+async def start(message: Message):
+    await message.answer('Привет, я бот!')
+
 async def main():
     await dp.start_polling()
 
