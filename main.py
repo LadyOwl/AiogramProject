@@ -30,7 +30,7 @@ async def aitext(message: Message):
 
 @dp.message(Command('help'))
 async def help(message: Message):
-    await message.answer('Этот бот умеет выполнять комманды: \n /start \n /help')
+    await message.answer('Этот бот умеет выполнять команды: \n /start \n /help')
 
 @dp.message(CommandStart())
 async def start(message: Message):
