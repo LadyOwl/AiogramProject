@@ -24,9 +24,9 @@ async def video(message: Message):
 
 @dp.message(Command('voice'))
 async def voice(message: Message):
-    await bot.send_chat_action(message.chat.id, 'upload_video')
-    video = FSInputFile('video.mp4')
-    await bot.send_video(message.chat.id, video)
+    voice = FSInputFile('sample.ogg')
+    await message.answer_voice(voice)
+
 
 @dp.message(Command('audio'))
 async def audio(message: Message):
@@ -69,7 +69,7 @@ async def aitext(message: Message):
 
 @dp.message(Command('help'))
 async def help(message: Message):
-    await message.answer('Этот бот умеет выполнять команды: \n /start \n /help \n /video \n /audio \n /photo \n &photo \n /training')
+    await message.answer('Этот бот умеет выполнять команды: \n /start \n /help \n /video \n /audio \n /photo \n &photo \n /training \n /voice')
 
 @dp.message(CommandStart())
 async def start(message: Message):
