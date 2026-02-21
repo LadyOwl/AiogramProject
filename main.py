@@ -1,7 +1,7 @@
 import asyncio
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import CommandStart, Command
-from aiogram.types import Message
+from aiogram.types import Message, FSInputFile
 
 from config import TOKEN
 
@@ -10,6 +10,15 @@ import random
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
+
+@dp.message(Command('video'))
+async def video(message: Message):
+   video = FSInputFile('video.mp4')
+   await message.answer_video(video, caption='Это видео для тебя!')
+
+@dp.message(Command('audio'))
+async def audio(message: Message):
+    await message.answer('Этот бот умеет выполнять команды: \n /start \n /help')
 
 @dp.message(Command('photo', prefix='&'))
 async def photo(message: Message):
@@ -38,7 +47,8 @@ async def start(message: Message):
 
 @dp.message()
 async def start(message: Message):
-    await message.send_copy(chat_id=message.chat.id)
+    if message.text.lower() == 'тест':
+        await message.answer('тестируем')
 
 async def main():
     await dp.start_polling(bot)
