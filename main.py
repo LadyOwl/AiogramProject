@@ -27,6 +27,11 @@ async def voice(message: Message):
     voice = FSInputFile('sample.ogg')
     await message.answer_voice(voice)
 
+@dp.message(Command('doc'))
+async def doc(message: Message):
+    doc = FSInputFile('sample.ogg')
+    await message.answer_voice(voice)
+
 
 @dp.message(Command('audio'))
 async def audio(message: Message):
