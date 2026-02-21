@@ -13,12 +13,14 @@ dp = Dispatcher()
 
 @dp.message(Command('video'))
 async def video(message: Message):
-   video = FSInputFile('video.mp4')
-   await message.answer_video(video, caption='Это видео для тебя!')
+    await bot.send_chat_action(message.chat.id, 'upload_video')
+    video = FSInputFile('video.mp4')
+    await bot.send_video(message.chat.id, video)
 
 @dp.message(Command('audio'))
 async def audio(message: Message):
-    await message.answer('Этот бот умеет выполнять команды: \n /start \n /help')
+    audio = FSInputFile('audio.mp3')
+    await bot.send_audio(message.chat.id, audio)
 
 @dp.message(Command('photo', prefix='&'))
 async def photo(message: Message):
