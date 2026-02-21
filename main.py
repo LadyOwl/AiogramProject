@@ -29,8 +29,8 @@ async def voice(message: Message):
 
 @dp.message(Command('doc'))
 async def doc(message: Message):
-    doc = FSInputFile('sample.ogg')
-    await message.answer_voice(voice)
+    doc = FSInputFile('Test.pdf')
+    await bot.send_document(message.chat.id, doc)
 
 
 @dp.message(Command('audio'))
@@ -74,7 +74,7 @@ async def aitext(message: Message):
 
 @dp.message(Command('help'))
 async def help(message: Message):
-    await message.answer('Этот бот умеет выполнять команды: \n /start \n /help \n /video \n /audio \n /photo \n &photo \n /training \n /voice')
+    await message.answer('Этот бот умеет выполнять команды: \n /start \n /help \n /video \n /audio \n /photo \n &photo \n /training \n /voice \n /doc')
 
 @dp.message(CommandStart())
 async def start(message: Message):
