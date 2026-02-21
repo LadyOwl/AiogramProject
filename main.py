@@ -22,7 +22,7 @@ async def react_photo(message: Message):
     list = ['Классное фото!', 'Супер!', 'Огонь!', 'Непонятно!']
     rand_answ = random.choice(list)
     await message.answer(rand_answ)
-    await bot.download(message.photo[-1], destination=f'/tmp/{message.photo[-1].file_id}.jpg')
+    await bot.download(message.photo[-1], destination=f'tmp/{message.photo[-1].file_id}.jpg')
 
 @dp.message (F.text == 'Что такое ИИ?')
 async def aitext(message: Message):
