@@ -44,10 +44,10 @@ async def training(message: Message):
     await message.answer(f"Это ваша мини-тренировка на сегодня {rand_tr}")
 
     tts = gTTS(rand_tr, lang='ru')
-    tts.save('training.mp3')
-    audio = FSInputFile('training.mp3')
-    await bot.send_audio(message.chat.id, audio)
-    os.remove('training.mp3')
+    tts.save('training.ogg')
+    audio = FSInputFile('training.ogg')
+    await bot.send_voice(message.chat.id, audio)
+    os.remove('training.ogg')
 
 
 @dp.message(Command('photo', prefix='&'))
