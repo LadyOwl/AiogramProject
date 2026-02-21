@@ -11,7 +11,7 @@ import random
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
-@dp.message(Command('photo'))
+@dp.message(Command('photo', prefix='&'))
 async def photo(message: Message):
     list = ['https://ic.pics.livejournal.com/kiowa_mike/11303100/6116166/6116166_600.jpg', 'https://i.pinimg.com/736x/ac/c7/ae/acc7ae3d2f8f8e15b2e452633219cab2.jpg', 'https://cs12.pikabu.ru/post_img/big/2019/04/16/11/1555438706155677273.jpg','https://media-cdn.tripadvisor.com/media/photo-s/1b/6a/2f/e3/caption.jpg']
     rand_photo = random.choice(list)
