@@ -36,6 +36,10 @@ async def help(message: Message):
 async def start(message: Message):
     await message.answer('Привет, я бот!')
 
+@dp.message()
+async def start(message: Message):
+    await message.answer('Я тебе ответил!')
+
 async def main():
     await dp.start_polling(bot)
 
