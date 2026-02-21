@@ -22,6 +22,12 @@ async def video(message: Message):
     video = FSInputFile('video.mp4')
     await bot.send_video(message.chat.id, video)
 
+@dp.message(Command('voice'))
+async def voice(message: Message):
+    await bot.send_chat_action(message.chat.id, 'upload_video')
+    video = FSInputFile('video.mp4')
+    await bot.send_video(message.chat.id, video)
+
 @dp.message(Command('audio'))
 async def audio(message: Message):
     audio = FSInputFile('sound2.mp3')
