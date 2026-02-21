@@ -34,11 +34,11 @@ async def help(message: Message):
 
 @dp.message(CommandStart())
 async def start(message: Message):
-    await message.answer('Привет, я бот!')
+    await message.answer(f'Привет, {message.from_user.full_name}!')
 
 @dp.message()
 async def start(message: Message):
-    await message.answer('Я тебе ответил!')
+    await message.send_copy(chat_id=message.chat.id)
 
 async def main():
     await dp.start_polling(bot)
