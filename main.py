@@ -19,8 +19,18 @@ async def video(message: Message):
 
 @dp.message(Command('audio'))
 async def audio(message: Message):
-    audio = FSInputFile('audio.mp3')
+    audio = FSInputFile('sound2.mp3')
     await bot.send_audio(message.chat.id, audio)
+
+@dp.message(Command('training'))
+async def training(message: Message):
+    training_list = [
+        "Тренировка 1:\\n1. Скручивания: 3 подхода по 15 повторений\\n2. Велосипед: 3 подхода по 20 повторений (каждая сторона)\\n3. Планка: 3 подхода по 30 секунд",
+        "Тренировка 2:\\n1. Подъемы ног: 3 подхода по 15 повторений\\n2. Русский твист: 3 подхода по 20 повторений (каждая сторона)\\n3. Планка с поднятой ногой: 3 подхода по 20 секунд (каждая нога)",
+        "Тренировка 3:\\n1. Скручивания с поднятыми ногами: 3 подхода по 15 повторений\\n2. Горизонтальные ножницы: 3 подхода по 20 повторений\\n3. Боковая планка: 3 подхода по 20 секунд (каждая сторона)"
+    ]
+    rand_tr = random.choice(training_list)
+    await message.answer(f"Это ваша мини-тренировка на сегодня {rand_tr}")
 
 @dp.message(Command('photo', prefix='&'))
 async def photo(message: Message):
@@ -41,7 +51,7 @@ async def aitext(message: Message):
 
 @dp.message(Command('help'))
 async def help(message: Message):
-    await message.answer('Этот бот умеет выполнять команды: \n /start \n /help')
+    await message.answer('Этот бот умеет выполнять команды: \n /start \n /help \n /video \n /audio \n /photo \n &photo')
 
 @dp.message(CommandStart())
 async def start(message: Message):
