@@ -16,8 +16,25 @@ dp = Dispatcher()
 
 logging.basicConfig(level=logging.INFO)
 
+class Form (StatesGroup):
+    name = State()
+    age = State()
+    city = State()
 
+def init_db():
+    conn = sqlite3.connect('users_data.db')
+    cur = conn.cursor()
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            age INTEGER NOT NULL,
+            city TEXT NOT NULL)
+            ''')
+    conn.commit()
+    conn.close()
 
+init_db()
 
 
 
