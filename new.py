@@ -65,13 +65,8 @@ async def city(message: Message, state: FSMContext):
     conn.commit()
     conn.close()
 
-    await state.finish()
-    data = await state.get_data()
-    await message.answer(f'Привет, {data["name"]}! Тебе {data["age"]} лет. Ты живешь в городе {data["city"]}.')
-
-
-
-
+    async with aiohttp.ClientSession() as session:
+        async with session.get(f"http://api.openweathermap.org/data/2.5/weather?q={user_data['city']}&appid={WEATHER_API_KEY}&units=metric") as response:)
 
 async def main():
     await dp.start_polling(bot)
