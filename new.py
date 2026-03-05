@@ -36,6 +36,14 @@ def init_db():
 
 init_db()
 
+@dp.message(CommandStart())
+async def start(message: Message, state: FSMContext):
+    await message.answer('Привет! Как тебя зовут?')
+    await state.set_state(Form.name)
+
+@dp.message(Form.name)
+
+
 
 
 
