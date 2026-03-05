@@ -9,9 +9,14 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from config import TOKEN
 import sqlite3
 import aiohttp
+import logging
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
+
+logging.basicConfig(level=logging.INFO)
+
+
 
 
 
