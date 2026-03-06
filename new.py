@@ -6,7 +6,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
 
-from config import TOKEN
+from config import TOKEN, WEATHER_API_KEY
 import sqlite3
 import aiohttp
 import logging
@@ -61,12 +61,30 @@ async def city(message: Message, state: FSMContext):
     conn = sqlite3.connect('users_data.db')
     cur = conn.cursor()
     cur.execute('''
-    INSERT INTO (name, age, city) VALUES (?, ?, ?)''', (user_data['name'], user_data['age'], user_data['city']))
+    INSERT INTO users (name, age, city) VALUES (?, ?, ?)''', (user_data['name'], user_data['age'], user_data['city']))
     conn.commit()
     conn.close()
 
     async with aiohttp.ClientSession() as session:
-        async with session.get(f"http://api.openweathermap.org/data/2.5/weather?q={user_data['city']}&appid={WEATHER_API_KEY}&units=metric") as response:)
+        async with session.get(f"http://api.openweathermap.org/data/2.5/weather?q={user_data['city']}&appid={WEATHER_API_KEY}&units=metric") as response:
+            if response.status == 200:
+                weather_data = await response.json()
+                main = weather_data['main']
+                weather = weather_data['weather'][0]
+
+                temperature = main['temp']
+                humidity = main['humidity']
+                description = weather['description']
+
+                weather_report = (f"Город - {user_data['city']}\n"
+                                  f"Температура - {temperature}°C\n"
+                                  f"Влажность - {humidity}%\n"
+                                  f"Погода - {description}")
+                await message.answer(weather_report)
+            else:
+                await message.answer("Не удалось получить данные о погоде.")
+    await state.clear()
+
 
 async def main():
     await dp.start_polling(bot)
