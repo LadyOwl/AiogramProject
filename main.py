@@ -8,7 +8,7 @@ from gtts import gTTS
 import os
 
 from config import TOKEN
-from keyboards import main
+import keyboards as kb
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
@@ -19,7 +19,7 @@ async def help(message: Message):
 
 @dp.message(CommandStart())
 async def start(message: Message):
-    await message.answer(f'Привет,{message.from_user.first_name}!', reply_markup=main)
+    await message.answer(f'Привет,{message.from_user.first_name}!', reply_markup=kb.main)
 
 
 
