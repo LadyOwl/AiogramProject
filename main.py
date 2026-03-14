@@ -13,13 +13,17 @@ import keyboards as kb
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
+@dp.message(F.text == "Тестовая кнопка 1")
+async def test_button(message: Message):
+    await message.answer('Обработка нажатия на reply кнопку')
+
 @dp.message(Command('help'))
 async def help(message: Message):
     await message.answer('Это бот умеет выполнять команды: \n /start \n /help \n /minitranning')
 
 @dp.message(CommandStart())
 async def start(message: Message):
-    await message.answer(f'Привет,{message.from_user.first_name}!', reply_markup=await kb.test_keyboard())
+    await message.answer(f'Привет,{message.from_user.first_name}!', reply_markup=kb.main)
 
 
 
