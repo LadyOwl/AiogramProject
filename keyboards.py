@@ -9,8 +9,8 @@ main = ReplyKeyboardMarkup(keyboard=[
 
 inline_keyboard_test = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text="Каталог", callback_data='catalog')],
-    [InlineKeyboardButton(text="Новости", callback_data='news"')],
-    [InlineKeyboardButton(text="Профиль", call_back_data='profile')],
+    [InlineKeyboardButton(text="Новости", callback_data='news')],
+    [InlineKeyboardButton(text="Профиль", callback_data='profile')],
 ])
 
 test = ["Кнопка 1", "Кнопка 2", "Кнопка 3", "Кнопка 4"]

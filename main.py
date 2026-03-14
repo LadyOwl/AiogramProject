@@ -15,6 +15,7 @@ dp = Dispatcher()
 
 @dp.callback_query(F.data == 'news')
 async def news(callback: CallbackQuery):
+    await callback.answer("Загрузка новостей...")
     await callback.message.answer('Вот свежие новости')
 
 
