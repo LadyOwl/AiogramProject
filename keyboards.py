@@ -16,7 +16,7 @@ inline_keyboard_test = InlineKeyboardMarkup(inline_keyboard=[
 test = ["Кнопка 1", "Кнопка 2", "Кнопка 3", "Кнопка 4"]
 
 async def test_keyboard():
-    keyboard = ReplyKeyboardBuilder()
+    keyboard = InlineKeyboardBuilder()
     for key in test:
-        keyboard.add(KeyboardButton(text=key))
+        keyboard.add(InlineKeyboardButton(text=key, url='https://vkvideo.ru/video-65320054_456247389'))
     return keyboard.adjust(2).as_markup()
