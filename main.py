@@ -16,7 +16,7 @@ dp = Dispatcher()
 @dp.callback_query(F.data == 'news')
 async def news(callback: CallbackQuery):
     await callback.answer("Загрузка новостей...", show_alert=True)
-    await callback.message.answer('Вот свежие новости')
+    await callback.message.edit_text('Вот свежие новости', reply_markup=await kb.test_keyboard())
 
 
 @dp.message(F.text == "Тестовая кнопка 1")
