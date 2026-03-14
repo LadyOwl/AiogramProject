@@ -13,6 +13,8 @@ import keyboards as kb
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
+@dp.callback_query(F.data == 'news')
+
 @dp.message(F.text == "Тестовая кнопка 1")
 async def test_button(message: Message):
     await message.answer('Обработка нажатия на reply кнопку')
@@ -23,7 +25,8 @@ async def help(message: Message):
 
 @dp.message(CommandStart())
 async def start(message: Message):
-    await message.answer(f'Привет,{message.from_user.first_name}!', reply_markup=kb.main)
+    await message.answer(f'Привет,{message.from_user.first_name}!', reply_markup=kb.inline_keyboard_test)
+
 
 
 

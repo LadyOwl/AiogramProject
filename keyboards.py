@@ -8,7 +8,9 @@ main = ReplyKeyboardMarkup(keyboard=[
 ], resize_keyboard=True)
 
 inline_keyboard_test = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text="Видео", url="https://yandex.ru/video/preview/16673540000841744794")]
+    [InlineKeyboardButton(text="Каталог", callback_data='catalog')],
+    [InlineKeyboardButton(text="Новости", callback_data='news"')],
+    [InlineKeyboardButton(text="Профиль", call_back_data='profile')],
 ])
 
 test = ["Кнопка 1", "Кнопка 2", "Кнопка 3", "Кнопка 4"]
