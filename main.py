@@ -1,7 +1,7 @@
 import asyncio
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import CommandStart, Command
-from aiogram.types import Message, FSInputFile
+from aiogram.types import Message, FSInputFile, CallbackQuery
 import random
 
 from gtts import gTTS
@@ -14,6 +14,9 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
 @dp.callback_query(F.data == 'news')
+async def news(callback: CallbackQuery):
+    await callback.message.answer('Вот свежие новости')
+
 
 @dp.message(F.text == "Тестовая кнопка 1")
 async def test_button(message: Message):
