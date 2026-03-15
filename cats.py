@@ -26,9 +26,26 @@ def get_cat_image_by_breed(breed_id):
 def get_breed_info(breed_name):
     breeds = get_cat_breeds()
     for breed in breeds:
-        if breed['name'].lower == breed_name.lower():
+        if breed['name'].lower() == breed_name.lower():
             return breed
     return None
+
+@dp.message(CommandStart())
+async def start(message: Message):
+    await message.answer('Привет! Какая порода котиков тебе нравится?')
+
+@dp.message()
+async def send_cat_info(message: Message):
+    breed_name = message.text
+    breed_info = get_breed_info(breed_name)
+    if breed_info:
+        cat_image_url = get_cat_image_by_breed(breed_info['id'])
+        info = (f"Порода - {breed_info['name']}\n"
+                f"Описание - {breed_info['description']}\n"
+                f"Продолжительность жизни - {breed_info['life_span']} лет")
+        await message.answer_photo(photo=cat_image_url, caption=info)
+    else:
+        await message.answer('Такой породы не существует')
 
 
 
