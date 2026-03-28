@@ -23,7 +23,10 @@ button_exchange_rates = KeyboardButton(text="Курсы валют")
 button_tips = KeyboardButton(text="Советы по экономии")
 button_finances = KeyboardButton(text="Личные финансы")
 
-
+keyboards = ReplyKeyboardMarkup(keyboard=[
+    [button_register, button_exchange_rates],
+    [button_tips, button_finances]
+    ], resize_keyboard=True)
 
 
 
