@@ -19,7 +19,7 @@ dp = Dispatcher()
 logging.basicConfig(level=logging.INFO)
 
 button_register = KeyboardButton(text="Регистрация")
-button_exchange_rates = KeyboardButton(text="Курсы валют")
+button_exchange_rates = KeyboardButton(text="Курс валют")
 button_tips = KeyboardButton(text="Советы по экономии")
 button_finances = KeyboardButton(text="Личные финансы")
 
@@ -58,6 +58,23 @@ class FinancesForm(StatesGroup):
 @dp.message(CommandStart())
 async def send_start(message: Message):
     await message.answer('Привет! Я Ваш личный финансовый помощник. Выберите одну из опций в меню:', reply_markup=keyboards)
+
+@dp.message(F.text == 'Регистрация')
+async def registration(message: Message):
+    telegram_id = message.from_user.id
+    name = message.from_user.full_name
+    cursor.execute('''SELECT * FROM users WHERE telegram_id?''', (telegram_id,))
+    user = cursor.fetchone()
+    if user:
+        await message.answer('Вы уже зарегистрированы')
+    else:
+        cursor.execute('''INSERT INTO users (telegram_id, name) VALUES (?, ?)''', (telegram_id, name))
+        conn.commit()
+        await message.answer('Вы зарегистрированы')
+
+@dp.message(F.text == 'Курс валют')
+async def exchange_rates(message: Message):
+
 
 async def main():
     await dp.start_polling(bot)
