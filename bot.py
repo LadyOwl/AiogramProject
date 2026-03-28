@@ -32,7 +32,7 @@ conn = sqlite3.connect('users.db')
 cursor = conn.cursor()
 
 cursor.execute('''
-CREATE TABLE IFR NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS users(
     id INTEGER PRIMARY KEY,
     telegram_id INTEGER UNIQUE,
     name TEXT,
@@ -54,6 +54,10 @@ class FinancesForm(StatesGroup):
     expenses2 = State()
     category3 = State()
     expenses3 = State()
+
+@dp.message(CommandStart())
+async def send_start(message: Message):
+    await message.answer('Привет! Я Ваш личный финансовый помощник. Выберите одну из опций в меню:', reply_markup=keyboards)
 
 async def main():
     await dp.start_polling(bot)
