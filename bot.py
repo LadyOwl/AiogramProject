@@ -12,6 +12,7 @@ from config import TOKEN
 import sqlite3
 import aiohttp
 import logging
+import requests
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
@@ -55,7 +56,7 @@ class FinancesForm(StatesGroup):
     category3 = State()
     expenses3 = State()
 
-@dp.message(CommandStart())
+@dp.message(Command('start'))
 async def send_start(message: Message):
     await message.answer('Привет! Я Ваш личный финансовый помощник. Выберите одну из опций в меню:', reply_markup=keyboards)
 
@@ -63,7 +64,7 @@ async def send_start(message: Message):
 async def registration(message: Message):
     telegram_id = message.from_user.id
     name = message.from_user.full_name
-    cursor.execute('''SELECT * FROM users WHERE telegram_id?''', (telegram_id,))
+    cursor.execute('''SELECT * FROM users WHERE telegram_id = ?''', (telegram_id,))
     user = cursor.fetchone()
     if user:
         await message.answer('Вы уже зарегистрированы')
@@ -74,7 +75,23 @@ async def registration(message: Message):
 
 @dp.message(F.text == 'Курс валют')
 async def exchange_rates(message: Message):
+    url = 'https://v6.exchangerate-api.com/v6/824f9cb988544fea91efe3b2/latest/USD'
+    try:
+        response = requests.get(url)
+        data = response.json()
+        if response.status_code != 200:
+            await message.answer('Невозможно получить курсы валют. Попробуйте позже.')
+            return
+        usd_to_rub = data['conversion_rates']['RUB']
+        eur_to_usd = data['conversion_rates']['EUR']
 
+        eur_to_rub = eur_to_usd * usd_to_rub
+
+        await message.answer(f'1 USD - {usd_to_rub:.2f} RUB\n'
+                             f'1 EUR - {eur_to_rub:.2f} RUB')
+
+    except:
+        await message.answer('Невозможно получить курсы валют. Попробуйте позже.')
 
 async def main():
     await dp.start_polling(bot)
