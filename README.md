@@ -163,8 +163,9 @@ pip install pytest pytest-asyncio
 pytest tests/
 
 Пример теста хендлера:
-# tests/test_start.py
 ```bash
+# tests/test_start.py
+
 import pytest
 from aiogram import Bot, Dispatcher
 from handlers.start import cmd_start
@@ -176,9 +177,13 @@ async def test_cmd_start():
 ```
 
 ## 📄 Лицензия
-Проект распространяется под лицензией MIT. Подробности — в файле LICENSE.
+
+Проект распространяется под лицензией [MIT](LICENSE).
 
 ## 👤 Автор
+
 Юлия (Джулия)
+
 🔗 GitHub: https://github.com/LadyOwl
-✈️ Telegram-канал: Special_AIContent](https://t.me/Special_AIContent)
+
+✈️ Telegram-канал: Special_AIContent(https://t.me/Special_AIContent)
